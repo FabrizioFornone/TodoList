@@ -3,10 +3,11 @@
         <div
             class="vh-100 vw-100 d-flex flex-column justify-content-center align-items-center"
         >
-            <h1 >Vuejs Todo App</h1>
-            <form>
+            <h1>Vuejs Todo App</h1>
+            <form @submit.prevent="saveData">
                 <div class="input-group my-3">
                     <input
+                        v-model="formData.title"
                         type="text"
                         class="form-control-lg"
                         placeholder="Type here"
@@ -29,9 +30,26 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
     data() {
-        return {};
+        return {
+            formData: {
+                title: "",
+            },
+        };
+    },
+    methods: {
+        async saveData() {
+            try {
+                const resp = await axios.post("/api/todo", this.formData);
+                console.log(resp);
+            } catch (er) {
+                alert("Errore nell'invio della richiesta");
+                console.log(er.response.data);
+            }
+        },
     },
 
     mounted() {},
