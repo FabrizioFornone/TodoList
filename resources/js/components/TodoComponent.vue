@@ -77,7 +77,7 @@ export default {
     methods: {
         async saveData() {
             try {
-                const resp = await axios.post("/api/todo", this.formData);
+                await axios.post("/api/todo", this.formData);
                 this.formData.title = "";
                 this.getTodos();
             } catch (er) {
@@ -95,22 +95,26 @@ export default {
                     console.log(error);
                 });
         },
-        toggleTodo(todo) {
+        async toggleTodo(todo) {
             todo.completed = !todo.completed;
             if (todo.completed) {
-                axios.put("/api/todo/" + todo.id, {
+                await axios.put("/api/todo/" + todo.id, {
                     completed: 1,
                 });
             } else {
-                axios.put("/api/todo/" + todo.id, {
+                await axios.put("/api/todo/" + todo.id, {
                     completed: 0,
                 });
             }
         },
-        deleteTodo(todo) {
-            axios.delete("/api/todo/" + todo.id).then((resp) => {
-                this.todos = resp.data;
-            });
+        async deleteTodo(todo) {
+            try {
+                await axios.delete("/api/todo/" + todo.id);
+                this.getTodos();
+            } catch (er) {
+                alert("Errore nell'invio della richiesta");
+                console.log(er.response.data);
+            }
         },
     },
     mounted() {

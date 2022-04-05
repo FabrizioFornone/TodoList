@@ -2009,7 +2009,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var resp;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2019,26 +2018,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/todo", _this.formData);
 
               case 3:
-                resp = _context.sent;
                 _this.formData.title = "";
 
                 _this.getTodos();
 
-                _context.next = 12;
+                _context.next = 11;
                 break;
 
-              case 8:
-                _context.prev = 8;
+              case 7:
+                _context.prev = 7;
                 _context.t0 = _context["catch"](0);
                 alert("Errore nell'invio della richiesta");
                 console.log(_context.t0.response.data);
 
-              case 12:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 8]]);
+        }, _callee, null, [[0, 7]]);
       }))();
     },
     getTodos: function getTodos() {
@@ -2065,24 +2063,72 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     toggleTodo: function toggleTodo(todo) {
-      todo.completed = !todo.completed;
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                todo.completed = !todo.completed;
 
-      if (todo.completed) {
-        axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/todo/" + todo.id, {
-          completed: 1
-        });
-      } else {
-        axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/todo/" + todo.id, {
-          completed: 0
-        });
-      }
+                if (!todo.completed) {
+                  _context3.next = 6;
+                  break;
+                }
+
+                _context3.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/todo/" + todo.id, {
+                  completed: 1
+                });
+
+              case 4:
+                _context3.next = 8;
+                break;
+
+              case 6:
+                _context3.next = 8;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/todo/" + todo.id, {
+                  completed: 0
+                });
+
+              case 8:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
     },
     deleteTodo: function deleteTodo(todo) {
       var _this3 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]("/api/todo/" + todo.id).then(function (resp) {
-        _this3.todos = resp.data;
-      });
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                _context4.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]("/api/todo/" + todo.id);
+
+              case 3:
+                _this3.getTodos();
+
+                _context4.next = 10;
+                break;
+
+              case 6:
+                _context4.prev = 6;
+                _context4.t0 = _context4["catch"](0);
+                alert("Errore nell'invio della richiesta");
+                console.log(_context4.t0.response.data);
+
+              case 10:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[0, 6]]);
+      }))();
     }
   },
   mounted: function mounted() {

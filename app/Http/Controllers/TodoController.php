@@ -15,9 +15,8 @@ class TodoController extends Controller
     public function index()
     {
         $todos = Todo::all();
-        
-        return response()->json($todos);
 
+        return response()->json($todos);
     }
 
     /**
@@ -99,7 +98,5 @@ class TodoController extends Controller
         $todo = Todo::findOrFail($id);
 
         $todo->delete();
-        
-        return Todo::latest()->get();
     }
 }
