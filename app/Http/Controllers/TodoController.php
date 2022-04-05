@@ -84,7 +84,7 @@ class TodoController extends Controller
         $todo = Todo::findOrFail($id);
 
         $todo->update($request->all());
-        
+
         $todo->save();
     }
 
@@ -94,8 +94,12 @@ class TodoController extends Controller
      * @param  \App\Todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Todo $todo)
+    public function destroy($id)
     {
-        //
+        $todo = Todo::findOrFail($id);
+
+        $todo->delete();
+        
+        return Todo::latest()->get();
     }
 }

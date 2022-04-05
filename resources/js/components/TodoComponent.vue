@@ -48,7 +48,10 @@
                             </div>
                             <div>
                                 <i class="fas fa-edit px-3"></i
-                                ><i class="fas fa-trash-alt"></i>
+                                ><i
+                                    class="fas fa-trash-alt"
+                                    @click="deleteTodo(todo)"
+                                ></i>
                             </div>
                         </div>
                         <hr />
@@ -103,6 +106,11 @@ export default {
                     completed: 0,
                 });
             }
+        },
+        deleteTodo(todo) {
+            axios.delete("/api/todo/" + todo.id).then((resp) => {
+                this.todos = resp.data;
+            });
         },
     },
     mounted() {

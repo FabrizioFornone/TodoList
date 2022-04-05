@@ -1991,6 +1991,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2073,6 +2076,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           completed: 0
         });
       }
+    },
+    deleteTodo: function deleteTodo(todo) {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]("/api/todo/" + todo.id).then(function (resp) {
+        _this3.todos = resp.data;
+      });
     }
   },
   mounted: function mounted() {
@@ -3445,7 +3455,17 @@ var render = function () {
                       _vm._v(_vm._s(todo.title) + "\n                        "),
                     ]),
                     _vm._v(" "),
-                    _vm._m(1, true),
+                    _c("div", [
+                      _c("i", { staticClass: "fas fa-edit px-3" }),
+                      _c("i", {
+                        staticClass: "fas fa-trash-alt",
+                        on: {
+                          click: function ($event) {
+                            return _vm.deleteTodo(todo)
+                          },
+                        },
+                      }),
+                    ]),
                   ]
                 ),
                 _vm._v(" "),
@@ -3477,15 +3497,6 @@ var staticRenderFns = [
           ),
         ]
       ),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("i", { staticClass: "fas fa-edit px-3" }),
-      _c("i", { staticClass: "fas fa-trash-alt" }),
     ])
   },
 ]
