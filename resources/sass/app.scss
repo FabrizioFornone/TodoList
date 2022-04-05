@@ -1,13 +1,30 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url("https://fonts.googleapis.com/css?family=Nunito");
 
 // Variables
-@import 'variables';
+@import "variables";
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
 
+// FontAwesome
+@import "~@fortawesome/fontawesome-free/css/all.css";
 
-body {
-    background-color: #c0c0c0;
+body,
+.grey-todo {
+    background-color: #d5d5d5;
+}
+
+.white-todo {
+    background-color: #f0f0f0;
+}
+
+hr {
+    margin: 0;
+    border-top: 1px solid #000;
+}
+
+i {
+    cursor: pointer;
+    font-size: 20px;
 }

@@ -14,7 +14,10 @@ class TodoController extends Controller
      */
     public function index()
     {
-        //
+        $todos = Todo::all();
+        
+        return response()->json($todos);
+
     }
 
     /**
@@ -76,9 +79,13 @@ class TodoController extends Controller
      * @param  \App\Todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Todo $todo)
+    public function update(Request $request, $id)
     {
-        //
+        $todo = Todo::findOrFail($id);
+
+        $todo->update($request->all());
+        
+        $todo->save();
     }
 
     /**

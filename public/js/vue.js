@@ -1961,13 +1961,44 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       formData: {
         title: ""
-      }
+      },
+      todos: ""
     };
   },
   methods: {
@@ -1986,26 +2017,67 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 resp = _context.sent;
-                console.log(resp);
-                _context.next = 11;
+                _this.formData.title = "";
+
+                _this.getTodos();
+
+                _context.next = 12;
                 break;
 
-              case 7:
-                _context.prev = 7;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](0);
                 alert("Errore nell'invio della richiesta");
                 console.log(_context.t0.response.data);
 
-              case 11:
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee, null, [[0, 8]]);
       }))();
+    },
+    getTodos: function getTodos() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/todo").then(function (resp) {
+                  _this2.todos = resp.data;
+                })["catch"](function (error) {
+                  console.log(error);
+                });
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    toggleTodo: function toggleTodo(todo) {
+      todo.completed = !todo.completed;
+
+      if (todo.completed) {
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/todo/" + todo.id, {
+          completed: 1
+        });
+      } else {
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/todo/" + todo.id, {
+          completed: 0
+        });
+      }
     }
   },
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    this.getTodos();
+  }
 });
 
 /***/ }),
@@ -3291,51 +3363,98 @@ var render = function () {
           "vh-100 vw-100 d-flex flex-column justify-content-center align-items-center",
       },
       [
-        _c("h1", [_vm._v("Vuejs Todo App")]),
-        _vm._v(" "),
-        _c(
-          "form",
-          {
-            on: {
-              submit: function ($event) {
-                $event.preventDefault()
-                return _vm.saveData.apply(null, arguments)
+        _c("div", [
+          _c("h1", { staticClass: "text-center" }, [_vm._v("Vuejs Todo App")]),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              on: {
+                submit: function ($event) {
+                  $event.preventDefault()
+                  return _vm.saveData.apply(null, arguments)
+                },
               },
             },
-          },
-          [
-            _c("div", { staticClass: "input-group my-3" }, [
-              _c("input", {
-                directives: [
+            [
+              _c("div", { staticClass: "input-group my-3" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.formData.title,
+                      expression: "formData.title",
+                    },
+                  ],
+                  staticClass: "form-control-lg",
+                  attrs: {
+                    type: "text",
+                    placeholder: "Type here",
+                    "aria-label": "Recipient's username",
+                    "aria-describedby": "button-addon2",
+                  },
+                  domProps: { value: _vm.formData.title },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.formData, "title", $event.target.value)
+                    },
+                  },
+                }),
+                _vm._v(" "),
+                _vm._m(0),
+              ]),
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "bg-light p-2 border rounded" },
+            _vm._l(_vm.todos, function (todo, index) {
+              return _c("div", { key: todo.id }, [
+                _c(
+                  "div",
                   {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.formData.title,
-                    expression: "formData.title",
+                    staticClass: "d-flex justify-content-between px-2 py-3",
+                    class: index % 2 == 0 ? "grey-todo" : "white-todo",
                   },
-                ],
-                staticClass: "form-control-lg",
-                attrs: {
-                  type: "text",
-                  placeholder: "Type here",
-                  "aria-label": "Recipient's username",
-                  "aria-describedby": "button-addon2",
-                },
-                domProps: { value: _vm.formData.title },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.formData, "title", $event.target.value)
-                  },
-                },
-              }),
-              _vm._v(" "),
-              _vm._m(0),
-            ]),
-          ]
-        ),
+                  [
+                    _c("div", [
+                      _c("span", { staticClass: "pr-2" }, [
+                        todo.completed
+                          ? _c("i", {
+                              staticClass: "fas fa-check-circle",
+                              on: {
+                                click: function ($event) {
+                                  return _vm.toggleTodo(todo)
+                                },
+                              },
+                            })
+                          : _c("i", {
+                              staticClass: "far fa-check-circle",
+                              on: {
+                                click: function ($event) {
+                                  return _vm.toggleTodo(todo)
+                                },
+                              },
+                            }),
+                      ]),
+                      _vm._v(_vm._s(todo.title) + "\n                        "),
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(1, true),
+                  ]
+                ),
+                _vm._v(" "),
+                _c("hr"),
+              ])
+            }),
+            0
+          ),
+        ]),
       ]
     ),
   ])
@@ -3354,10 +3473,19 @@ var staticRenderFns = [
         },
         [
           _vm._v(
-            "\n                        Add this to your list\n                    "
+            "\n                            Add this to your list\n                        "
           ),
         ]
       ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("i", { staticClass: "fas fa-edit px-3" }),
+      _c("i", { staticClass: "fas fa-trash-alt" }),
     ])
   },
 ]
