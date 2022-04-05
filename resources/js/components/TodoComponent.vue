@@ -26,7 +26,7 @@
                         </div>
                     </div>
                 </form>
-                <div class="bg-light p-2 border rounded">
+                <div v-if="todos.length !== 0" class="bg-light p-2 border rounded">
                     <div v-for="(todo, index) in todos" :key="todo.id">
                         <div
                             :class="index % 2 == 0 ? 'grey-todo' : 'white-todo'"
@@ -71,21 +71,26 @@ export default {
             formData: {
                 title: "",
             },
-            todos: "",
+            todos: [],
         };
     },
     methods: {
+        // method that saves the new todo
         async saveData() {
             try {
+                // called axios "post" type
                 await axios.post("/api/todo", this.formData);
                 this.formData.title = "";
+                // executing the method to have all the todo
                 this.getTodos();
             } catch (er) {
-                alert("Errore nell'invio della richiesta");
+                alert("Error sending request");
                 console.log(er.response.data);
             }
         },
+        // method that returns all todo
         async getTodos() {
+            // called axios "get" type
             await axios
                 .get("/api/todo")
                 .then((resp) => {
@@ -95,29 +100,46 @@ export default {
                     console.log(error);
                 });
         },
+        // method that manages "completed" value
         async toggleTodo(todo) {
             todo.completed = !todo.completed;
             if (todo.completed) {
-                await axios.put("/api/todo/" + todo.id, {
-                    completed: 1,
-                });
+                try {
+                    // called axios "put" type
+                    await axios.put("/api/todo/" + todo.id, {
+                        completed: 1,
+                    });
+                } catch (er) {
+                    alert("Error sending request");
+                    console.log(er.response.data);
+                }
             } else {
-                await axios.put("/api/todo/" + todo.id, {
-                    completed: 0,
-                });
+                try {
+                    // called axios "put" type
+                    await axios.put("/api/todo/" + todo.id, {
+                        completed: 0,
+                    });
+                } catch (er) {
+                    alert("Error sending request");
+                    console.log(er.response.data);
+                }
             }
         },
+        // method that eliminates a todo
         async deleteTodo(todo) {
             try {
+                // called axios "delete" type
                 await axios.delete("/api/todo/" + todo.id);
+                // executing the method to have all the todo
                 this.getTodos();
             } catch (er) {
-                alert("Errore nell'invio della richiesta");
+                alert("Error sending request");
                 console.log(er.response.data);
             }
         },
     },
     mounted() {
+        // executing the method to have all the todo
         this.getTodos();
     },
 };

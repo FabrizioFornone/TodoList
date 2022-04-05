@@ -2001,10 +2001,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       formData: {
         title: ""
       },
-      todos: ""
+      todos: []
     };
   },
   methods: {
+    // method that saves the new todo
     saveData: function saveData() {
       var _this = this;
 
@@ -2018,7 +2019,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/todo", _this.formData);
 
               case 3:
-                _this.formData.title = "";
+                _this.formData.title = ""; // executing the method to have all the todo
 
                 _this.getTodos();
 
@@ -2028,7 +2029,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 7:
                 _context.prev = 7;
                 _context.t0 = _context["catch"](0);
-                alert("Errore nell'invio della richiesta");
+                alert("Error sending request");
                 console.log(_context.t0.response.data);
 
               case 11:
@@ -2039,6 +2040,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee, null, [[0, 7]]);
       }))();
     },
+    // method that returns all todo
     getTodos: function getTodos() {
       var _this2 = this;
 
@@ -2062,6 +2064,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
+    // method that manages "completed" value
     toggleTodo: function toggleTodo(todo) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
@@ -2071,33 +2074,56 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 todo.completed = !todo.completed;
 
                 if (!todo.completed) {
-                  _context3.next = 6;
+                  _context3.next = 13;
                   break;
                 }
 
-                _context3.next = 4;
+                _context3.prev = 2;
+                _context3.next = 5;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/todo/" + todo.id, {
                   completed: 1
                 });
 
-              case 4:
-                _context3.next = 8;
+              case 5:
+                _context3.next = 11;
                 break;
 
-              case 6:
-                _context3.next = 8;
+              case 7:
+                _context3.prev = 7;
+                _context3.t0 = _context3["catch"](2);
+                alert("Error sending request");
+                console.log(_context3.t0.response.data);
+
+              case 11:
+                _context3.next = 22;
+                break;
+
+              case 13:
+                _context3.prev = 13;
+                _context3.next = 16;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/todo/" + todo.id, {
                   completed: 0
                 });
 
-              case 8:
+              case 16:
+                _context3.next = 22;
+                break;
+
+              case 18:
+                _context3.prev = 18;
+                _context3.t1 = _context3["catch"](13);
+                alert("Error sending request");
+                console.log(_context3.t1.response.data);
+
+              case 22:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3);
+        }, _callee3, null, [[2, 7], [13, 18]]);
       }))();
     },
+    // method that eliminates a todo
     deleteTodo: function deleteTodo(todo) {
       var _this3 = this;
 
@@ -2111,6 +2137,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]("/api/todo/" + todo.id);
 
               case 3:
+                // executing the method to have all the todo
                 _this3.getTodos();
 
                 _context4.next = 10;
@@ -2119,7 +2146,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 6:
                 _context4.prev = 6;
                 _context4.t0 = _context4["catch"](0);
-                alert("Errore nell'invio della richiesta");
+                alert("Error sending request");
                 console.log(_context4.t0.response.data);
 
               case 10:
@@ -2132,6 +2159,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   mounted: function mounted() {
+    // executing the method to have all the todo
     this.getTodos();
   }
 });
@@ -3466,60 +3494,64 @@ var render = function () {
             ]
           ),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "bg-light p-2 border rounded" },
-            _vm._l(_vm.todos, function (todo, index) {
-              return _c("div", { key: todo.id }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "d-flex justify-content-between px-2 py-3",
-                    class: index % 2 == 0 ? "grey-todo" : "white-todo",
-                  },
-                  [
-                    _c("div", [
-                      _c("span", { staticClass: "pr-2" }, [
-                        todo.completed
-                          ? _c("i", {
-                              staticClass: "fas fa-check-circle",
-                              on: {
-                                click: function ($event) {
-                                  return _vm.toggleTodo(todo)
-                                },
+          _vm.todos.length !== 0
+            ? _c(
+                "div",
+                { staticClass: "bg-light p-2 border rounded" },
+                _vm._l(_vm.todos, function (todo, index) {
+                  return _c("div", { key: todo.id }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "d-flex justify-content-between px-2 py-3",
+                        class: index % 2 == 0 ? "grey-todo" : "white-todo",
+                      },
+                      [
+                        _c("div", [
+                          _c("span", { staticClass: "pr-2" }, [
+                            todo.completed
+                              ? _c("i", {
+                                  staticClass: "fas fa-check-circle",
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.toggleTodo(todo)
+                                    },
+                                  },
+                                })
+                              : _c("i", {
+                                  staticClass: "far fa-check-circle",
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.toggleTodo(todo)
+                                    },
+                                  },
+                                }),
+                          ]),
+                          _vm._v(
+                            _vm._s(todo.title) + "\n                        "
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", [
+                          _c("i", { staticClass: "fas fa-edit px-3" }),
+                          _c("i", {
+                            staticClass: "fas fa-trash-alt",
+                            on: {
+                              click: function ($event) {
+                                return _vm.deleteTodo(todo)
                               },
-                            })
-                          : _c("i", {
-                              staticClass: "far fa-check-circle",
-                              on: {
-                                click: function ($event) {
-                                  return _vm.toggleTodo(todo)
-                                },
-                              },
-                            }),
-                      ]),
-                      _vm._v(_vm._s(todo.title) + "\n                        "),
-                    ]),
+                            },
+                          }),
+                        ]),
+                      ]
+                    ),
                     _vm._v(" "),
-                    _c("div", [
-                      _c("i", { staticClass: "fas fa-edit px-3" }),
-                      _c("i", {
-                        staticClass: "fas fa-trash-alt",
-                        on: {
-                          click: function ($event) {
-                            return _vm.deleteTodo(todo)
-                          },
-                        },
-                      }),
-                    ]),
-                  ]
-                ),
-                _vm._v(" "),
-                _c("hr"),
-              ])
-            }),
-            0
-          ),
+                    _c("hr"),
+                  ])
+                }),
+                0
+              )
+            : _vm._e(),
         ]),
       ]
     ),
