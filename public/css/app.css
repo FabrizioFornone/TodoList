@@ -7782,27 +7782,32 @@ readers do not read off random characters that represent icons */
   background-color: #f0f0f0;
 }
 
-.green-todo {
-  background-color: #38c172;
+.purple-todo {
+  background-color: #a18ecc;
+  color: #f0f0f0;
+}
+
+h1 {
+  color: #f0f0f0;
 }
 
 .todo-box {
   height: 100px;
-  color: #000;
 }
 
 .todo-box .todo-title,
 .todo-box input {
   line-height: 2;
   font-size: 17px;
+  padding: 3px 5px;
 }
 
 .todo-box .todo-title {
-  padding: 1px 2px;
+  border: 1px solid transparent;
 }
 
 .todo-box input {
-  border: 0;
+  border: 1px solid #000;
 }
 
 .todo-box i {
@@ -7816,8 +7821,9 @@ readers do not read off random characters that represent icons */
 
 footer h5 {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 30px;
+  right: 30px;
+  color: #f0f0f0;
 }
 
 /*!
@@ -18784,7 +18790,6 @@ a.text-dark:focus {
 
 body {
   background: linear-gradient(#e66465, #9198e5);
-  color: #f0f0f0;
 }
 
 hr {

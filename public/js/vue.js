@@ -3641,7 +3641,7 @@ var render = function () {
                       {
                         staticClass:
                           "d-flex justify-content-between align-items-center px-3 todo-box",
-                        class: todo.completed ? "green-todo" : "white-todo",
+                        class: todo.completed ? "purple-todo" : "white-todo",
                       },
                       [
                         _c("div", [
@@ -3761,7 +3761,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-success mx-2",
+          staticClass: "btn btn-dark mx-2",
           attrs: { type: "submit", id: "button-addon2" },
         },
         [

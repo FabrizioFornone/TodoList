@@ -20,7 +20,7 @@
 
                         <div class="input-group-append">
                             <button
-                                class="btn btn-success mx-2"
+                                class="btn btn-dark mx-2"
                                 type="submit"
                                 id="button-addon2"
                             >
@@ -36,7 +36,7 @@
                     <div v-for="(todo, index) in todos" :key="todo.id">
                         <div
                             :class="
-                                todo.completed ? 'green-todo' : 'white-todo'
+                                todo.completed ? 'purple-todo' : 'white-todo'
                             "
                             class="d-flex justify-content-between align-items-center px-3 todo-box"
                         >
