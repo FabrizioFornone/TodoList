@@ -3,21 +3,24 @@
         <div
             class="vh-100 vw-100 d-flex flex-column justify-content-center align-items-center"
         >
-            <div>
-                <h1 class="text-center">Vuejs Todo App</h1>
+            <div class="container">
+                <h1 class="text-center">Full Stack Todo App</h1>
                 <form @submit.prevent="saveData">
-                    <div class="input-group my-3">
-                        <input
-                            v-model="formData.title"
-                            type="text"
-                            class="form-control-lg"
-                            placeholder="Type here"
-                            aria-label="Recipient's username"
-                            aria-describedby="button-addon2"
-                        />
+                    <div class="input-group my-3 d-flex justify-content-center">
+                        <div>
+                            <input
+                                v-model="formData.title"
+                                type="text"
+                                class="form-control-lg"
+                                placeholder="Type here"
+                                aria-label="Recipient's username"
+                                aria-describedby="button-addon2"
+                            />
+                        </div>
+
                         <div class="input-group-append">
                             <button
-                                class="btn btn-outline-secondary btn-success mx-2"
+                                class="btn btn-success mx-2"
                                 type="submit"
                                 id="button-addon2"
                             >
@@ -26,11 +29,16 @@
                         </div>
                     </div>
                 </form>
-                <div v-if="todos.length !== 0" class="bg-light p-2 border rounded">
+                <div
+                    v-if="todos.length !== 0"
+                    class="bg-light p-2 border rounded"
+                >
                     <div v-for="(todo, index) in todos" :key="todo.id">
                         <div
-                            :class="index % 2 == 0 ? 'grey-todo' : 'white-todo'"
-                            class="d-flex justify-content-between px-2 py-3"
+                            :class="
+                                todo.completed ? 'green-todo' : 'white-todo'
+                            "
+                            class="d-flex justify-content-between align-items-center px-3 todo-box"
                         >
                             <div>
                                 <span class="pr-2">
@@ -43,12 +51,31 @@
                                         v-else
                                         class="far fa-circle"
                                         @click="toggleTodo(todo)"
-                                    ></i> </span
-                                >{{ todo.title }}
+                                    ></i>
+                                </span>
+                                <span
+                                    v-if="editMode != index"
+                                    class="todo-title"
+                                    >{{ todo.title }}</span
+                                >
+                                <input
+                                    v-if="editMode === index"
+                                    v-model="todo.title"
+                                    type="text"
+                                />
                             </div>
                             <div>
-                                <i class="fas fa-edit px-3"></i
-                                ><i
+                                <i
+                                    class="fas fa-edit px-3"
+                                    @click="editMethod(index)"
+                                    v-if="editMode != index"
+                                ></i>
+                                <i
+                                    class="fas fa-edit px-3 edit-mode"
+                                    @click="updateTodo(todo)"
+                                    v-else
+                                ></i>
+                                <i
                                     class="fas fa-trash-alt"
                                     @click="deleteTodo(todo)"
                                 ></i>
@@ -58,12 +85,14 @@
                     </div>
                 </div>
             </div>
+           
         </div>
     </div>
 </template>
 
 <script>
 import axios from "axios";
+
 
 export default {
     data() {
@@ -72,6 +101,7 @@ export default {
                 title: "",
             },
             todos: [],
+            editMode: null,
         };
     },
     methods: {
@@ -105,7 +135,7 @@ export default {
             todo.completed = !todo.completed;
             if (todo.completed) {
                 try {
-                    // called axios "put" type
+                    // called axios "patch" type
                     await axios.patch("/api/todo/" + todo.id, {
                         completed: 1,
                     });
@@ -115,7 +145,7 @@ export default {
                 }
             } else {
                 try {
-                    // called axios "put" type
+                    // called axios "patch" type
                     await axios.patch("/api/todo/" + todo.id, {
                         completed: 0,
                     });
@@ -123,6 +153,19 @@ export default {
                     alert("Error sending request");
                     console.log(er.response.data);
                 }
+            }
+        },
+        // method that update a todo title
+        async updateTodo(todo) {
+            this.editMode = null;
+            try {
+                // called axios "patch" type
+                await axios.patch("/api/todo/" + todo.id, {
+                    title: todo.title,
+                });
+            } catch (er) {
+                alert("Error sending request");
+                console.log(er.response.data);
             }
         },
         // method that eliminates a todo
@@ -137,6 +180,9 @@ export default {
                 console.log(er.response.data);
             }
         },
+        editMethod(x) {
+            this.editMode = x;
+        },
     },
     mounted() {
         // executing the method to have all the todo
@@ -144,3 +190,5 @@ export default {
     },
 };
 </script>
+
+<style lang="scss" scoped></style>

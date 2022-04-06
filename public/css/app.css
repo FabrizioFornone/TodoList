@@ -7778,6 +7778,47 @@ readers do not read off random characters that represent icons */
   unicode-range: U+F041,U+F047,U+F065-F066,U+F07D-F07E,U+F080,U+F08B,U+F08E,U+F090,U+F09A,U+F0AC,U+F0AE,U+F0B2,U+F0D0,U+F0D6,U+F0E4,U+F0EC,U+F10A-F10B,U+F123,U+F13E,U+F148-F149,U+F14C,U+F156,U+F15E,U+F160-F161,U+F163,U+F175-F178,U+F195,U+F1F8,U+F219,U+F250,U+F252,U+F27A; }
 @charset "UTF-8";
 
+.white-todo {
+  background-color: #f0f0f0;
+}
+
+.green-todo {
+  background-color: #38c172;
+}
+
+.todo-box {
+  height: 100px;
+}
+
+.todo-box .todo-title,
+.todo-box input {
+  line-height: 2;
+  font-size: 17px;
+}
+
+.todo-box .todo-title {
+  padding: 1px 2px;
+}
+
+.todo-box input {
+  border: 0;
+}
+
+.todo-box i {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.todo-box .edit-mode {
+  color: orange;
+}
+
+footer h5 {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
 /*!
  * Bootstrap v4.6.1 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -18740,22 +18781,12 @@ a.text-dark:focus {
   }
 }
 
-body,
-.grey-todo {
+body {
   background-color: #d5d5d5;
-}
-
-.white-todo {
-  background-color: #f0f0f0;
 }
 
 hr {
   margin: 0;
   border-top: 1px solid #000;
-}
-
-i {
-  cursor: pointer;
-  font-size: 20px;
 }
 

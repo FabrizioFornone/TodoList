@@ -1,14 +1,17 @@
 <template>
-    <div>
-        <TodoComponent></TodoComponent>
+    <div class="position-relative">
+        <todo-component />
+        <footer-component />
     </div>
 </template>
 
 <script>
 import TodoComponent from "../components/TodoComponent.vue";
 
+import FooterComponent from "../components/FooterComponent.vue";
+
 export default {
-    components: { TodoComponent },
+    components: { TodoComponent, FooterComponent },
 };
 </script>
 

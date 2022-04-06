@@ -2,7 +2,13 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito");
 
 // Variables
-@import "variables";
+@import "./partials/variables";
+
+// Main
+@import "./partials/main";
+
+// Footer
+@import "./partials/footer";
 
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
@@ -10,21 +16,11 @@
 // FontAwesome
 @import "~@fortawesome/fontawesome-free/css/all.css";
 
-body,
-.grey-todo {
+body {
     background-color: #d5d5d5;
-}
-
-.white-todo {
-    background-color: #f0f0f0;
 }
 
 hr {
     margin: 0;
     border-top: 1px solid #000;
-}
-
-i {
-    cursor: pointer;
-    font-size: 20px;
 }
