@@ -41,7 +41,7 @@
                                     ></i>
                                     <i
                                         v-else
-                                        class="far fa-check-circle"
+                                        class="far fa-circle"
                                         @click="toggleTodo(todo)"
                                     ></i> </span
                                 >{{ todo.title }}
@@ -106,7 +106,7 @@ export default {
             if (todo.completed) {
                 try {
                     // called axios "put" type
-                    await axios.put("/api/todo/" + todo.id, {
+                    await axios.patch("/api/todo/" + todo.id, {
                         completed: 1,
                     });
                 } catch (er) {
@@ -116,7 +116,7 @@ export default {
             } else {
                 try {
                     // called axios "put" type
-                    await axios.put("/api/todo/" + todo.id, {
+                    await axios.patch("/api/todo/" + todo.id, {
                         completed: 0,
                     });
                 } catch (er) {

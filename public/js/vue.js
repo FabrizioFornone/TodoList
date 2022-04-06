@@ -2080,7 +2080,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _context3.prev = 2;
                 _context3.next = 5;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/todo/" + todo.id, {
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.patch("/api/todo/" + todo.id, {
                   completed: 1
                 });
 
@@ -2101,7 +2101,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 13:
                 _context3.prev = 13;
                 _context3.next = 16;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/todo/" + todo.id, {
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.patch("/api/todo/" + todo.id, {
                   completed: 0
                 });
 
@@ -3519,7 +3519,7 @@ var render = function () {
                                   },
                                 })
                               : _c("i", {
-                                  staticClass: "far fa-check-circle",
+                                  staticClass: "far fa-circle",
                                   on: {
                                     click: function ($event) {
                                       return _vm.toggleTodo(todo)
