@@ -7788,6 +7788,7 @@ readers do not read off random characters that represent icons */
 
 .todo-box {
   height: 100px;
+  color: #000;
 }
 
 .todo-box .todo-title,
@@ -18782,7 +18783,8 @@ a.text-dark:focus {
 }
 
 body {
-  background-color: #d5d5d5;
+  background: linear-gradient(#e66465, #9198e5);
+  color: #f0f0f0;
 }
 
 hr {

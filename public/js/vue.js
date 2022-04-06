@@ -2044,6 +2044,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3683,6 +3684,21 @@ var render = function () {
                                 attrs: { type: "text" },
                                 domProps: { value: todo.title },
                                 on: {
+                                  keyup: function ($event) {
+                                    if (
+                                      !$event.type.indexOf("key") &&
+                                      _vm._k(
+                                        $event.keyCode,
+                                        "enter",
+                                        13,
+                                        $event.key,
+                                        "Enter"
+                                      )
+                                    ) {
+                                      return null
+                                    }
+                                    return _vm.updateTodo(todo)
+                                  },
                                   input: function ($event) {
                                     if ($event.target.composing) {
                                       return

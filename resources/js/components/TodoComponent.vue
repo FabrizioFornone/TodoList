@@ -62,6 +62,7 @@
                                     v-if="editMode === index"
                                     v-model="todo.title"
                                     type="text"
+                                    @keyup.enter="updateTodo(todo)"
                                 />
                             </div>
                             <div>

@@ -23,7 +23,6 @@
 
 <body>
     <div id="app">
-        @yield('content')
     </div>
     <script src="{{ asset('js/vue.js') }}"></script>
 </body>
